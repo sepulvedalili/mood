@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    #Cross-Origin Resource Sharing
+    'corsheaders',
+
     # External apps
     'rest_framework',
 
@@ -53,6 +57,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5174",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:5174",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5174",
 ]
 
 ROOT_URLCONF = 'mood_backend.urls'
@@ -84,7 +104,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mood_db',
         'USER': 'mood_user',
-        'PASSWORD': 'mood-password',
+        'PASSWORD': 'lili',
         'HOST': '127.0.0.1',
         'PORT': '5433',
     }
