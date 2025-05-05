@@ -33,7 +33,6 @@ export default function LoginForm() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            console.log('Login data:', formData);
 
             const response = await axios.post(
                 'http://localhost:8000/api/login/',

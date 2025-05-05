@@ -1,0 +1,76 @@
+# ===============================
+# PYTHON / DJANGO
+# ===============================
+
+# Bytecode
+*.py[cod]
+__pycache__/
+*.so
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# Django stuff
+*.sqlite3
+db.sqlite3
+*.db
+*.log
+*.pot
+*.pyc
+local_settings.py
+
+# Environment variables
+.env
+.env.*
+*.env
+*.secret
+*.pem
+
+# Static & media files
+/static/
+media/
+staticfiles/
+static_root/
+
+# Migrations (optional, if auto-generated)
+*/migrations/__pycache__/
+*/migrations/*.py[cod]
+
+# ===============================
+# NODE / FRONTEND
+# ===============================
+
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build output
+build/
+.temp/
+
+# ===============================
+# IDE / SYSTEM FILES
+# ===============================
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
