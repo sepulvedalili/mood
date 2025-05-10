@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # External apps
     'rest_framework',
+    'rest_framework_simplejwt',
 
     # My apps
     'mood_api',
@@ -64,6 +65,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
@@ -78,6 +82,15 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 ROOT_URLCONF = 'mood_backend.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 TEMPLATES = [
     {

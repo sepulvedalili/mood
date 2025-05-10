@@ -43,11 +43,22 @@ export default function LoginForm() {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        "X-CSRFToken": getCookie("csrftoken"),
+                        'X-CSRFToken': getCookie("csrftoken"),
                     },
                     withCredentials: true,
                 }
             );
+
+            // Verifica qué tiene la respuesta completa
+            console.log("Respuesta completa:", response);
+
+            // Si el access_token está en la respuesta, lo mostramos
+            if (response.data && response.data.access_token) {
+                console.log('Access Token:', response.data.access_token);
+            } else {
+                console.log("No se encontró el token en la respuesta.");
+            }
+
             setMessage(response.data.message);
         } catch (error) {
             setError(error.response?.data?.message || 'Login failed');

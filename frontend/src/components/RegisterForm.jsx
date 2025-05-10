@@ -39,7 +39,7 @@ export default function RegisterForm() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                'http://localhost:8000/api/register/', formData,
+                'http://localhost:8000/api/users/', formData,
                 {
                     headers: {
                         'Content-Type': 'application/json',
