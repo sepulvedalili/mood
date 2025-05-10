@@ -7,7 +7,7 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<MoodEntryPage />} />
+                <Route path="/mood" element={<MoodEntryPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
             </Routes>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
     const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ export default function LoginForm() {
     })
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -34,7 +35,7 @@ export default function LoginForm() {
         e.preventDefault();
         try {
 
-            const response = await axios.post(
+            const { data } = await axios.post(
                 'http://localhost:8000/api/login/',
                 {
                     username: formData.username,
@@ -48,18 +49,10 @@ export default function LoginForm() {
                     withCredentials: true,
                 }
             );
+            localStorage.setItem('access_token', data.access_token);
 
-            // Verifica qué tiene la respuesta completa
-            console.log("Respuesta completa:", response);
-
-            // Si el access_token está en la respuesta, lo mostramos
-            if (response.data && response.data.access_token) {
-                console.log('Access Token:', response.data.access_token);
-            } else {
-                console.log("No se encontró el token en la respuesta.");
-            }
-
-            setMessage(response.data.message);
+            setMessage(data.message);
+            navigate('/mood')
         } catch (error) {
             setError(error.response?.data?.message || 'Login failed');
         }
