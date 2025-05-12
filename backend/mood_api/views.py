@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -74,8 +75,22 @@ class CreateMoodView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        """
+        Handle POST request to create a new mood for the authenticated user.
+        """
         serializer = MoodSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class MoodListView(ListAPIView):
+    """
+    API view to retrieve the list of moods for the authenticated user.
+    """
+    serializer_class = MoodSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # pylint: disable=no-member
+        return Mood.objects.filter(user=self.request.user)
