@@ -1,14 +1,13 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
-
 from django.contrib.auth import authenticate, login
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Max
 
 from .models import Mood
 from .serializers import MoodSerializer
@@ -83,14 +82,24 @@ class CreateMoodView(APIView):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class MoodListView(ListAPIView):
-    """
-    API view to retrieve the list of moods for the authenticated user.
-    """
-    serializer_class = MoodSerializer
+class DailyLatestMoodView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        # pylint: disable=no-member
-        return Mood.objects.filter(user=self.request.user)
+    def get(self, request):
+        user = request.user
+
+        # Subquery para obtener el último 'created_at' por día del usuario
+        latest_per_day = (
+            Mood.objects
+            .filter(user=user)
+            .values('created_at__date')
+            .annotate(latest_created_at=Max('created_at'))
+            .values_list('latest_created_at', flat=True)
+        )
+
+        # Obtener los moods que coinciden con esos timestamps
+        moods = Mood.objects.filter(user=user, created_at__in=latest_per_day)
+
+        serializer = MoodSerializer(moods, many=True)
+        return Response(serializer.data)
+

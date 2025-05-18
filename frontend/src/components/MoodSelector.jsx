@@ -7,7 +7,7 @@ export default function MoodSelector({ selectedMood, onMoodSelect }) {
     return (
 
         <div className='flex min-h-full flex-col justify-center px-6 py-6 lg:px-8' >
-            <div className="flex justify-center gap-6 mt-6">
+            <div className="flex justify-center gap-6">
                 {moods.map((mood) => (
                     <div
                         key={mood.name}
