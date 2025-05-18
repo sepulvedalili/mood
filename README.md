@@ -45,3 +45,20 @@ Développer une application minimaliste qui contribue à l’épanouissement per
 
 ## Interface de MOOD
 ![MOOD](docs/img/moodApp.png)
+
+## Phase 1 : Humeur et santé mentale (MVP)  
+# Suivi quotidien de l’humeur 
+
+Le composant **MoodSelector** permet à l’utilisateur d’enregistrer son humeur de manière intuitive en cliquant sur un emoji.
+Pour garantir une expérience simple et rapide, seules trois humeurs sont proposées : happy, neutral et sad.
+Une capture d’écran est jointe pour illustrer cette fonctionnalité.
+
+![MOOD](docs/img/moodTracker.png)
+
+# Historique des émotions
+
+L’application inclut un composant nommé **MoodCalendar**, qui affiche l’historique des humeurs enregistrées par l’utilisateur sous forme de calendrier interactif.
+Chaque jour affiche un emoji correspondant à la dernière humeur saisie.
+Une capture d’écran est fournie ci-dessous pour illustrer cette fonctionnalité.
+
+![MOOD](docs/img/moodCalendar.png)
