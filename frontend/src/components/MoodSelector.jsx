@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function MoodSelector({ selectedMood, onMoodSelect }) {
     const moods = [
         { name: 'happy', emoji: '😊', color: 'text-yellow-500' },
